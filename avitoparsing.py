@@ -30,12 +30,11 @@ def get_links_cars(name_page, page_link):
 
     def get_links(result):
         soup = BeautifulSoup(page_html, "lxml")
-        re_car_url = re.compile("iva-item-sliderLink-[a-zA-Z0-9]")
-        cars_links = soup.find_all("a", class_=re_car_url)
+        re_car = re.compile("iva-item-root-[a-zA-Z0-9_]* photo-slider-slider-[a-zA-Z0-9_]* iva-item-list-[a-zA-Z0-9_]* iva-item-redesign-[a-zA-Z0-9_]* iva-item-responsive-[a-zA-Z0-9_]* items-item-[a-zA-Z0-9_]* items-listItem-[a-zA-Z0-9_]* js-catalog-item-enum")
+        re_car_url = re.compile("iva-item-sliderLink-[a-zA-Z0-9_]")
+        cars_links = soup.find_all("div", class_=re_car)
         for car_link in cars_links:
-            result[car_link.get("id")] = "https://www.avito.ru" + car_link.get("href")
-            print(car_link.get("id"))
-            print(car_link.get("href"))
+            result[car_link.get("id")] = "https://www.avito.ru" + car_link.find("a", class_=re_car_url).get("href")
         return result
 
     result = {}
@@ -55,9 +54,9 @@ def get_links_cars(name_page, page_link):
     # открываем страницы по номерам и сохраняем в файл
     for p in range(2, int(number_page)):
         link = page_link + "&p=" + str(p)
-        print(link)
         ad.get_page(link, name_page)
-
+        result = get_links(result)
+        print(result)
 
 
     print(number_page)

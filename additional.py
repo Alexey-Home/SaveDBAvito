@@ -22,8 +22,8 @@ def get_page(url, name_page):
     options.add_argument("--disable-blink-features=AutomationControlled")
 
     #headless mode
-    # options.add_argument("--no-sandbox")
-    # options.headless = True
+    options.add_argument("--no-sandbox")
+    options.headless = True
 
     if platform == "win32":
         path = r"chromedriver.exe"
