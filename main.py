@@ -26,6 +26,8 @@ def main():
             name_page = model + ".html"
             ad.get_page(link, name_page)
             cars_links = avp.get_links_cars(name_page, link)
+            data[company][model] = cars_links
+            pass
 
 
 
@@ -39,6 +41,7 @@ def collect_links():
     for name, link in links_company.items():
         ad.get_page(link, name_page)
         links[name] = avp.get_links(name_page)
+        print(links)
     return links
 
 

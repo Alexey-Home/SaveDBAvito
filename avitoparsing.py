@@ -29,6 +29,8 @@ def get_links(page_with_links):
 def get_links_cars(name_page, page_link):
 
     def get_links(result):
+        with open("pages/" + name_page, "r", encoding="utf-8") as file:
+            page_html = file.read()
         soup = BeautifulSoup(page_html, "lxml")
         re_car = re.compile("iva-item-root-[a-zA-Z0-9_]* photo-slider-slider-[a-zA-Z0-9_]* iva-item-list-[a-zA-Z0-9_]* iva-item-redesign-[a-zA-Z0-9_]* iva-item-responsive-[a-zA-Z0-9_]* items-item-[a-zA-Z0-9_]* items-listItem-[a-zA-Z0-9_]* js-catalog-item-enum")
         re_car_url = re.compile("iva-item-sliderLink-[a-zA-Z0-9_]")
@@ -39,11 +41,11 @@ def get_links_cars(name_page, page_link):
 
     result = {}
     print("Открываю сохраненую страницу...")
-    with open("pages/" + name_page, "r", encoding="utf-8") as file:
-        page_html = file.read()
 
     result = get_links(result)
     print(result)
+
+    TODO:Испрваить поиск количество страниц
 
     # собираем количество страниц
     soup = BeautifulSoup(page_html, "lxml")
@@ -56,8 +58,9 @@ def get_links_cars(name_page, page_link):
         link = page_link + "&p=" + str(p)
         ad.get_page(link, name_page)
         result = get_links(result)
-        print(result)
+        print(len(result))
+    return result
 
 
-    print(number_page)
+
 
