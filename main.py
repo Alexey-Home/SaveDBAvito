@@ -24,7 +24,7 @@ def main():
     for company, models in data.items():
         for model, link in models.items():
             name_page = model + ".html"
-            ad.get_page(link, name_page)
+            # ad.get_page(link, name_page)
             cars_links = avp.get_links_cars(name_page, link)
             data[company][model] = cars_links
             pass

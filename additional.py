@@ -35,7 +35,7 @@ def get_page(url, name_page):
     try:
         print("Открываю страницу...")
         driver.get(url=url)
-        time.sleep(2)
+        time.sleep(10)
         time.sleep(random.randint(0, 5))
 
         print("Сохраняю страницу...")
